@@ -43,7 +43,7 @@ export default {
           }
           // Set the token and user profile in local storage
           localStorage.setItem('user_id', profile.user_id)
-          localStorage.setItem('user_metadata', JSON.stringify(profile.user_metadata))
+          localStorage.setItem('user_metadata', JSON.stringify(profile.user_metadata || {}))
 
           // go to profile
           self.$router.push('/profile')
