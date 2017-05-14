@@ -37,13 +37,18 @@ export default {
         self.lock.getProfile(authResult.idToken, (error, profile) => {
           if (error) {
             // Handle error
+            console.log(error)
+            self.$router.push('/')
             return
           }
           // Set the token and user profile in local storage
-          localStorage.setItem('profile', JSON.stringify(profile))
           localStorage.setItem('user_id', profile.user_id)
-          self.authenticated = true
+          localStorage.setItem('user_metadata', JSON.stringify(profile.user_metadata))
+
+          // go to profile
           self.$router.push('/profile')
+
+          self.authenticated = true
         })
       })
       self.lock.on('authorization_error', (error) => {
@@ -61,6 +66,8 @@ export default {
       // To log out, we just need to remove the token and profile
       // from local storage
       localStorage.removeItem('id_token')
+      localStorage.removeItem('user_id')
+      localStorage.removeItem('user_metadata')
       this.authenticated = false
       this.$router.push('/')
     }
