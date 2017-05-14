@@ -6,6 +6,12 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+// check if authenticated
+Vue.prototype.$check_auth = function (options) {
+  console.log('checking authentication')
+  return !!localStorage.getItem('id_token')
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
